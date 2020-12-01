@@ -1,10 +1,10 @@
 import Head from "next/head";
 
 export const siteMetaData = {
-  siteName: "Next.js + Tailwind CSS template",
+  siteName: "Astronomy Picture of the Day",
   siteURL: "",
-  title: "Next.js + Tailwind CSS template",
-  description: "Next.js + Tailwind CSS template",
+  title: "Astronomy Picture of the Day",
+  description: "Astronomy Picture of the Day via NASA.",
   twitterHandle: "earvinpiamonte",
   socialPreview: "/images/preview.png",
 };

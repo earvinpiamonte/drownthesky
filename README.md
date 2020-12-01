@@ -1,4 +1,4 @@
-# Astronomy Picture of the Day
+# drownthesky
 
 Discover the universe with different photographs of astronomers each day.
 

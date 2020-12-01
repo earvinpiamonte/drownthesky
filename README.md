@@ -1,6 +1,6 @@
 # drownthesky
 
-Discover the universe with different photographs of astronomers each day.
+Discover the universe each day with different photographs by astronomers.
 
 ## Maintainer
 

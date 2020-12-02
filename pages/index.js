@@ -3,26 +3,26 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Layout, { siteMetaData } from "../components/layout";
+import { apiStates, useAPI } from "../hooks/useapi";
 
 const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
 const Home = () => {
-  const [data, setData] = React.useState({});
+  const { state, data, errorText } = useAPI(
+    `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
+  );
 
-  const fetchData = async () => {
-    const request = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
-    )
-      .then((data) => data.json())
-      .then((data) => data);
-
-    console.log(request);
-    setData(request);
-  };
-
-  React.useEffect(() => {
-    fetchData();
-  }, [setData]);
+  switch (state) {
+    case apiStates.LOADING:
+      console.log(state);
+      break;
+    case apiStates.SUCCESS:
+      console.log(state, data);
+      break;
+    case apiStates.ERROR:
+      console.log(state, errorText);
+      break;
+  }
 
   return (
     <Layout>
@@ -31,24 +31,21 @@ const Home = () => {
       </Head>
       <section className="py-8">
         <div className="container mx-auto px-4">
-          <div className="mb-4 relative h-screen">
-            {data.hdurl && (
-              <>
-                <Image
-                  src={data.hdurl}
-                  className="rounded-lg"
-                  layout="fill"
-                  objectFit="cover"
-                  quality={100}
-                />
-              </>
-            )}
-          </div>
-          <h1 className="uppercase font-bold mb-4">{data.title}</h1>
-          <p className="mb-8">{data.explanation}</p>
-          <p className="mb-4 text-sm">
+          <h1 className="mb-1 text-xl font-bold uppercase">{data.title}</h1>
+          <p className="mb-4">
             &copy; {data.copyright} {data.date}
           </p>
+          <div className="mb-4 relative h-screen">
+            {data.hdurl && (
+              <Image
+                src={data.hdurl}
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+              />
+            )}
+          </div>
+          <p className="mb-4">{data.explanation}</p>
         </div>
       </section>
     </Layout>

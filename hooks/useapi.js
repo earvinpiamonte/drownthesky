@@ -6,7 +6,7 @@ export const apiStates = {
   ERROR: "ERROR",
 };
 
-export const useAPI = (url) => {
+export const useAPI = (url, CACHE_STORAGE_KEY = "@default-app-data") => {
   const [data, setData] = React.useState({
     state: apiStates.LOADING,
     errorText: "",
@@ -19,6 +19,15 @@ export const useAPI = (url) => {
     setPartData({
       state: apiStates.LOADING,
     });
+
+    if (localStorage.getItem(CACHE_STORAGE_KEY) !== null) {
+      console.log("FETCHED FROM CACHED!");
+      setPartData({
+        state: apiStates.SUCCESS,
+        data: JSON.parse(localStorage.getItem(CACHE_STORAGE_KEY)),
+      });
+      return;
+    }
 
     fetch(url)
       .then((response) => {
@@ -37,6 +46,9 @@ export const useAPI = (url) => {
             state: apiStates.SUCCESS,
             data,
           });
+
+          localStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(data));
+
           return;
         }
 

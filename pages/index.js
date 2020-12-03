@@ -29,23 +29,34 @@ const Home = () => {
       <Head>
         <title>{`${siteMetaData.title} by @${siteMetaData.twitterHandle}`}</title>
       </Head>
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="mb-1 text-xl font-bold uppercase">{data.title}</h1>
-          <p className="mb-4">
-            &copy; {data.copyright} {data.date}
-          </p>
-          <div className="mb-4 relative h-screen">
-            {data.hdurl && (
-              <Image
-                src={data.hdurl}
-                layout="fill"
-                objectFit="cover"
-                quality={100}
-              />
-            )}
+      <section className="h-screen">
+        <div className="grid grid-cols-3 h-full">
+          <div className="md:col-span-2 col-span-3 md:h-auto h-screen">
+            <div className="relative h-full bg-gray-100">
+              {data.hdurl && (
+                <Image
+                  src={data.hdurl}
+                  layout="fill"
+                  objectFit="cover"
+                  quality={100}
+                />
+              )}
+              <div className="absolute bg-black bg-opacity-30 md:bottom-0 md:top-auto top-0 right-0 px-4 py-1">
+                <h2 className="text-white text-xs">
+                  &copy; {data.copyright || `NASA`}
+                </h2>
+              </div>
+            </div>
           </div>
-          <p className="mb-4">{data.explanation}</p>
+          <div className="md:col-span-1 col-span-3 md:order-first md:mt-0 -mt-32 md:overflow-y-auto">
+            <div className="py-10 px-4 relative bg-white">
+              <h1 className="font-bold uppercase mb-1">{data.title}</h1>
+              <p className="mb-8">
+                <time dateTime={data.date}>{data.date}</time>
+              </p>
+              <p className="mb-4">{data.explanation}</p>
+            </div>
+          </div>
         </div>
       </section>
     </Layout>

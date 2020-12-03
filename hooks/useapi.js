@@ -6,12 +6,14 @@ export const apiStates = {
   ERROR: "ERROR",
 };
 
-export const useAPI = (url) => {
+export const useAPI = (url, localStorageKey = "@local-data") => {
   const [data, setData] = React.useState({
     state: apiStates.LOADING,
     errorText: "",
     data: [],
   });
+
+  const todayDate = new Date().toISOString().slice(0, 10);
 
   const setPartData = (partialData) => setData({ ...data, ...partialData });
 
@@ -19,6 +21,25 @@ export const useAPI = (url) => {
     setPartData({
       state: apiStates.LOADING,
     });
+
+    if (localStorage.getItem(localStorageKey) !== null) {
+      let localData = JSON.parse(localStorage.getItem(localStorageKey));
+
+      // If not expired -> fetch from localStorage
+
+      if (localData.date === todayDate) {
+        console.log("FETCHING FROM CACHE");
+
+        setPartData({
+          state: apiStates.SUCCESS,
+          data: localData,
+        });
+
+        return;
+      }
+
+      // Else -> fetch
+    }
 
     fetch(url)
       .then((response) => {
@@ -37,6 +58,8 @@ export const useAPI = (url) => {
             state: apiStates.SUCCESS,
             data,
           });
+
+          localStorage.setItem(localStorageKey, JSON.stringify(data));
 
           return;
         }

@@ -7,6 +7,10 @@ Discover the universe each day with different photographs by astronomers.
 - [Next.js](https://nextjs.org)
 - [Tailwind CSS](https://tailwindcss.com/)
 
+## Deployment
+
+This project is deployed to [Vercel](https://vercel.com/).
+
 ## Develop
 
 Follow the prerequisites in order to run this project on your local machine.

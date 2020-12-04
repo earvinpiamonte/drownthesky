@@ -27,15 +27,15 @@ const Home = () => {
   return (
     <Layout>
       <Head>
-        <title>{`${siteMetaData.title} by @${siteMetaData.twitterHandle}`}</title>
+        <title>{`${siteMetaData.title} by @${siteMetaData.twitterHandle} via NASA API`}</title>
       </Head>
       <section className="h-screen">
         <div className="grid grid-cols-3 h-full">
           <div className="md:col-span-2 col-span-3">
             <div className="relative h-screen bg-gray-100">
-              {data.hdurl && (
+              {data.url && (
                 <Image
-                  src={data.hdurl}
+                  src={data.url}
                   layout="fill"
                   objectFit="cover"
                   quality={100}
@@ -44,16 +44,16 @@ const Home = () => {
                 />
               )}
               <div className="absolute bg-black bg-opacity-30 bottom-0 right-0 px-4 py-1">
-                <h2 className="text-white text-xs">
-                  &copy; {data.copyright || `NASA`}{" "}
-                  <time dateTime={data.date}>{data.date}</time>
+                <h2 className="text-white text-sm">
+                  &copy; <time dateTime={data.date}>{data.date}</time>{" "}
+                  {data.copyright || `NASA`}
                 </h2>
               </div>
             </div>
           </div>
           <div className="md:col-span-1 col-span-3 md:order-first md:overflow-y-auto">
             <div className="py-10 px-4 relative bg-white">
-              <h1 className="text-2xl mb-8">{data.title}</h1>
+              <h1 className="font-bold uppercase mb-4">{data.title}</h1>
               <p className="mb-4">{data.explanation}</p>
             </div>
           </div>

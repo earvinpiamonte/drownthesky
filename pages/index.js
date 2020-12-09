@@ -32,8 +32,8 @@ const Home = () => {
       <section className="h-screen">
         <div className="grid grid-cols-3 h-full">
           <div className="md:col-span-2 col-span-3">
-            <div className="relative h-screen bg-gray-100">
-              {data.url && (
+            <div className="relative h-screen bg-gray-100 overflow-y-hidden">
+              {data.url && data.media_type === "image" && (
                 <Image
                   src={data.url}
                   layout="fill"
@@ -42,6 +42,11 @@ const Home = () => {
                   loading="eager"
                   priority={true}
                 />
+              )}
+              {data.url && data.media_type === "video" && (
+                <div className="responsive-embed">
+                  <iframe src={data.url} className="mx-auto"></iframe>
+                </div>
               )}
               <div className="absolute bg-black bg-opacity-30 bottom-0 right-0 px-4 py-1">
                 <h2 className="text-white text-sm">

@@ -8,47 +8,48 @@ const Layout = ({ children }) => {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content={publicRuntimeConfig.siteMetaData.description}
-        />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:card" content="summary" key="twitter_card" />
         <meta
           name="twitter:creator"
           content={publicRuntimeConfig.siteMetaData.twitterHandle}
-          key="twhandle"
+          key="twitter_creator"
         />
 
         {/* Open Graph */}
         <meta
           property="og:url"
           content={publicRuntimeConfig.siteMetaData.siteURL}
-          key="ogurl"
+          key="og_url"
         />
         <meta
           property="og:image"
           content={`${publicRuntimeConfig.siteMetaData.siteURL}${publicRuntimeConfig.siteMetaData.socialPreview}`}
-          key="ogimage"
+          key="og_image"
         />
         <meta
           property="og:site_name"
           content={publicRuntimeConfig.siteName}
-          key="ogsitename"
+          key="og_site_name"
         />
         <meta
           property="og:title"
           content={publicRuntimeConfig.siteMetaData.title}
-          key="ogtitle"
+          key="og_title"
         />
         <meta
           property="og:description"
           content={publicRuntimeConfig.siteMetaData.description}
-          key="ogdesc"
+          key="og_description"
         />
 
-        <title>{publicRuntimeConfig.siteMetaData.title}</title>
+        {/* Defaults */}
+        <meta
+          name="description"
+          content={publicRuntimeConfig.siteMetaData.description}
+        />
+        <title key="title">{publicRuntimeConfig.siteMetaData.title}</title>
       </Head>
       <main>{children}</main>
     </>

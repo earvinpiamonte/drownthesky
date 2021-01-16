@@ -1,5 +1,7 @@
 import getConfig from "next/config";
 import Head from "next/head";
+import Error from "next/error";
+
 import Layout from "../components/layout";
 import PhotoOfTheDay from "../components/photo-of-the-day";
 
@@ -9,13 +11,30 @@ const { publicRuntimeConfig } = getConfig();
 const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
 const APOD = ({ data }) => {
-  /* to do: condition to 404 -> if data is null or data.error != undefined */
   console.log(data);
+
+  if (data.code === 400) {
+    let errorText = data.msg;
+
+    errorText =
+      errorText[errorText.length - 1] === "."
+        ? errorText.slice(0, -1)
+        : errorText;
+
+    return (
+      <Layout>
+        <Head>
+          <meta name="robots" content="noindex" />
+        </Head>
+        <Error statusCode={400} title={errorText} />
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
       <Head>
-        <title>{`${publicRuntimeConfig.siteMetaData.title} by @${publicRuntimeConfig.siteMetaData.twitterHandle} via NASA API`}</title>
+        <title key="title">{`${data.title} | ${publicRuntimeConfig.siteMetaData.title}`}</title>
       </Head>
       <PhotoOfTheDay data={data} />
     </Layout>
@@ -43,7 +62,7 @@ export const getServerSideProps = async (context) => {
     data = await getAPOD(queryString);
   }
 
-  return { props: { data } };
+  return data ? { props: { data } } : { notFound: true };
 };
 
 export default APOD;

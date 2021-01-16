@@ -1,9 +1,10 @@
-import React from "react";
-
+import getConfig from "next/config";
 import Head from "next/head";
 import Image from "next/image";
-import Layout, { siteMetaData } from "../components/layout";
+import Layout from "../components/layout";
 import { apiStates, useAPI } from "../hooks/useapi";
+
+const { publicRuntimeConfig } = getConfig();
 
 const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <Layout>
       <Head>
-        <title>{`${siteMetaData.title} by @${siteMetaData.twitterHandle} via NASA API`}</title>
+        <title>{`${publicRuntimeConfig.siteMetaData.title} by @${publicRuntimeConfig.siteMetaData.twitterHandle} via NASA API`}</title>
       </Head>
       <section className="h-screen">
         <div className="grid grid-cols-3 h-full">

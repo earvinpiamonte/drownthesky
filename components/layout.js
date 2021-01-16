@@ -1,51 +1,59 @@
 import Head from "next/head";
+import getConfig from "next/config";
 
-export const siteMetaData = {
-  siteName: "Astronomy Picture of the Day",
-  siteURL: "",
-  title: "Astronomy Picture of the Day",
-  description: "Astronomy Picture of the Day via NASA.",
-  twitterHandle: "earvinpiamonte",
-  socialPreview: "/images/preview.png",
-};
+const { publicRuntimeConfig } = getConfig();
 
-export default function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content={siteMetaData.description} />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:card" content="summary" key="twitter_card" />
         <meta
           name="twitter:creator"
-          content={siteMetaData.twitterHandle}
-          key="twhandle"
+          content={publicRuntimeConfig.siteMetaData.twitterHandle}
+          key="twitter_creator"
         />
 
         {/* Open Graph */}
-        <meta property="og:url" content={siteMetaData.siteURL} key="ogurl" />
+        <meta
+          property="og:url"
+          content={publicRuntimeConfig.siteMetaData.siteURL}
+          key="og_url"
+        />
         <meta
           property="og:image"
-          content={`${siteMetaData.siteURL}${siteMetaData.socialPreview}`}
-          key="ogimage"
+          content={`${publicRuntimeConfig.siteMetaData.siteURL}${publicRuntimeConfig.siteMetaData.socialPreview}`}
+          key="og_image"
         />
         <meta
           property="og:site_name"
-          content={siteMetaData.siteName}
-          key="ogsitename"
+          content={publicRuntimeConfig.siteName}
+          key="og_site_name"
         />
-        <meta property="og:title" content={siteMetaData.title} key="ogtitle" />
+        <meta
+          property="og:title"
+          content={publicRuntimeConfig.siteMetaData.title}
+          key="og_title"
+        />
         <meta
           property="og:description"
-          content={siteMetaData.description}
-          key="ogdesc"
+          content={publicRuntimeConfig.siteMetaData.description}
+          key="og_description"
         />
 
-        <title>{siteMetaData.title}</title>
+        {/* Defaults */}
+        <meta
+          name="description"
+          content={publicRuntimeConfig.siteMetaData.description}
+        />
+        <title key="title">{publicRuntimeConfig.siteMetaData.title}</title>
       </Head>
       <main>{children}</main>
     </>
   );
-}
+};
+
+export default Layout;

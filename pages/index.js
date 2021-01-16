@@ -10,7 +10,6 @@ const { publicRuntimeConfig } = getConfig();
 const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
 const Home = ({ data }) => {
-  console.log(data);
   return (
     <Layout>
       <Head>

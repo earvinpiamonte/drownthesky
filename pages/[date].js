@@ -11,8 +11,6 @@ const { publicRuntimeConfig } = getConfig();
 const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
 const APOD = ({ data }) => {
-  console.log(data);
-
   if (data.code === 400) {
     let errorText = data.msg;
 

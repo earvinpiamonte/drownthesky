@@ -1,4 +1,4 @@
-const getAPOD = async (queryString) => {
+const getAPOD = async (queryString : string) => {
   return await fetch(
       `https://api.nasa.gov/planetary/apod?${queryString}`,
       {

@@ -1,9 +1,11 @@
+import {ReactNode} from "react"
+
 import Head from "next/head";
 import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
 
-const Layout = ({ children }) => {
+const Layout = ({ children }: {children: ReactNode}) => {
   return (
     <>
       <Head>

@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next'
+
 import getConfig from "next/config";
 import Head from "next/head";
 import Layout from "../components/layout";
@@ -20,7 +22,7 @@ const Home = ({ data }) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const queryString = new URLSearchParams({
     api_key: API_KEY,
   }).toString();

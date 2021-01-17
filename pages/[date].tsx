@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next'
+
 import getConfig from "next/config";
 import Head from "next/head";
 import Error from "next/error";
@@ -39,13 +41,13 @@ const APOD = ({ data }) => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const { date } = context.query;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { date }: {date?: string} = context.query;
 
   let requestDate = new Date(date);
   let data = null;
 
-  const validDate = requestDate == "Invalid Date" ? null : requestDate;
+  const validDate = requestDate.toString() != 'Invalid Date' ? requestDate : null;
 
   if (validDate) {
     const day = validDate.getDate();

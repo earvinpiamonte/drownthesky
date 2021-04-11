@@ -49,7 +49,7 @@ npm run dev
 
 ## Maintainer
 
-This project is developed and maintained by [@earvinpiamonte](https://twitter.com/earvinpiamonte).
+This project is developed and maintained by [earvinpiamonte.com](https://www.earvinpiamonte.com).
 
 ## Credits
 
